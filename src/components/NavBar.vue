@@ -3,7 +3,7 @@
     <nav class="navbar">
       <!-- Логотип -->
       <router-link to="/" class="logo">
-        <div class="smart">Neuro</div>.Resume
+        <div class="neuro">Neuro</div>.Resume
       </router-link>
 
       <!-- Навигация -->
@@ -15,26 +15,21 @@
           <router-link to="/resume-builder" :class="{ active: currentRoute === '/resume-builder' }">Создать резюме</router-link>
         </li>
         <li>
-          <router-link to="/profile" :class="{ active: currentRoute === '/profile' }">Профиль</router-link>
+          <router-link to="/profile" class="profile-btn" :class="{ click: currentRoute === '/profile' }">Профиль</router-link>
         </li>
       </ul>
 
-      <!-- Выпадающий список -->
-      <div 
-        class="dropdown" 
-        v-else
-        @mouseenter="openDropdown" 
-        @mouseleave="closeDropdown"
-      >
-        <button class="dropdown-button">
-          {{ currentPageName }}
-        </button>
-        <ul class="dropdown-menu" v-show="isDropdownVisible">
-          <li v-for="(link, index) in navLinks" :key="index" :style="dropdownItemStyle(index)">
-            <router-link :to="link.path" @click="closeDropdown">{{ link.name }}</router-link>
-          </li>
-        </ul>
-      </div>
+      <!-- Бургер-меню -->
+    <button class="burger-menu" @click="toggleMenu" v-if="isCollapsed">
+      ☰
+    </button>
+
+    <!-- Выпадающее меню -->
+    <ul class="dropdown-menu" v-if="isDropdownVisible">
+      <li><router-link to="/" @click="toggleMenu">Главная</router-link></li>
+      <li><router-link to="/resume-builder" @click="toggleMenu">Создать резюме</router-link></li>
+      <li><router-link to="/profile" @click="toggleMenu">Профиль</router-link></li>
+    </ul>
     </nav>
   </header>
 </template>
@@ -46,7 +41,7 @@ import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
 
 export default {
-  name: "HeaderComponent",
+  name: "NavBar",
   setup() {
     const route = useRoute();
     const isCollapsed = ref(false);
@@ -54,9 +49,7 @@ export default {
 
     const navLinks = [
       { name: "Главная", path: "/" },
-      { name: "Рецепты", path: "/recipes" },
-      { name: "Планы питания", path: "/plans" },
-      { name: "О нас", path: "/about" },
+      { name: "Создать резюме", path: "/resume-builder" },
       { name: "Профиль", path: "/profile" },
     ];
 
@@ -67,26 +60,13 @@ export default {
       return currentLink ? currentLink.name : "Меню";
     });
 
-    const openDropdown = () => {
-      isDropdownVisible.value = true;
-    };
-
-    const closeDropdown = () => {
-      isDropdownVisible.value = false;
-    };
-
     const updateNavbarState = () => {
-  const navbar = document.querySelector(".navbar");
-  const navLinksEl = document.querySelector(".nav-links");
+      isCollapsed.value = window.innerWidth <= 768;
+    };
 
-  if (navbar && navLinksEl) {
-    const navLinksWidth = navLinksEl.offsetWidth || 0;
-    isCollapsed.value = navbar.offsetWidth < navLinksWidth + 150;
-  } else {
-    isCollapsed.value = window.innerWidth <= 768;
-  }
-};
-
+    const toggleMenu = () => {
+      isDropdownVisible.value = !isDropdownVisible.value;
+    };
 
     onMounted(() => {
       window.addEventListener("resize", updateNavbarState);
@@ -97,24 +77,10 @@ export default {
       window.removeEventListener("resize", updateNavbarState);
     });
 
-    const dropdownItemStyle = (index) => {
-      const delay = index * 0.1;
-      return {
-        animation: isDropdownVisible.value
-          ? `fadeIn 0.3s ease ${delay}s forwards`
-          : `fadeOut 0.3s ease ${delay}s forwards`,
-      };
-    };
-
     return {
-      currentRoute,
-      currentPageName,
       isCollapsed,
       isDropdownVisible,
-      navLinks,
-      openDropdown,
-      closeDropdown,
-      dropdownItemStyle,
+      toggleMenu,
     };
   },
 };
@@ -123,94 +89,115 @@ export default {
 
 <style>
 .navbar {
+  position: fixed; 
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%; 
+  height: 70px; 
+  border-radius: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; 
   align-items: center;
-  padding: 20px;
+  padding: 0 20px;
   background-color: white;
-  width: 100%;
-  box-sizing: border-box;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+body {
+  padding-top: 90px;
 }
 
 /* Логотип */
 .logo {
   font-size: 1.5em;
   font-weight: 600;
-  padding-left: 120px;
   text-decoration: none;
-  color: #000000;
+  color: #5A3E2B;
   transition: transform 0.3s ease;
-  display: flex;
+  display: block;
+  position: absolute;
   align-items: center;
+  position: absolute;
+  left: 5%;
+  white-space: nowrap;
+  flex-grow: 1;
+  text-align: center;
 }
 
-.smart {
+.logo:hover {
   color: #8B5E3C;
+}
+
+.neuro {
+  color: #5A3E2B;
   display: inline;
 }
 
+/* Навигация */
 .nav-links {
   display: flex;
   list-style: none;
+  position: absolute;
+  gap: 20px;
+  right: 5%;
 }
 
 .nav-links li {
-  margin-left: 20px;
   display: flex;
   align-items: center;
 }
 
 .nav-links a {
+  position: relative; /* Нужно для псевдоэлемента */
   text-decoration: none;
-  padding: 8px 15px;
-  color: #000; /* Основной цвет текста */
+  padding: 10px 15px;
+  color: #5A3E2B;
+  font-weight: 500;
   transition: color 0.3s ease;
 }
 
-.nav-links .click {
-  color: #12a370; /* Зелёный цвет для активной страницы */
+/* Добавляем псевдоэлемент для линии */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 0; /* Линия снизу */
+  left: 0;
+  width: 0; /* Начинаем с 0 */
+  height: 2px; /* Толщина линии */
+  background-color: #8B5E3C; /* Цвет линии */
+  transition: width 0.3s ease-in-out;
 }
 
-.nav-links a:hover {
-  color: #12a370; /* Зелёный цвет при наведении */
-}
-
-.nav-links .profile-btn {
-  color: #12a370 !important; /* Постоянный зелёный цвет */
-  border: 1px solid #12a370;
-  border-radius: 20px;
-  padding: 8px 15px;
-  text-decoration: none;
-  transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-/* Подсветка кнопки Профиль при наведении */
-.nav-links .profile-btn:hover {
-  color: white !important; /* Текст становится белым */
-  background-color: #12a370; /* Фон становится зелёным */
-}
-
-/* Выпадающий список */
-.dropdown {
-  position: relative;
-  margin-top: 10px;
-  width: 90%;
-  text-align: center;
-}
-
-.dropdown-button {
-  background-color: #12a370;
-  color: white;
-  padding: 12px 15px;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
+/* Для активной ссылки сразу показываем линию */
+.nav-links .active::after {
   width: 100%;
 }
 
+
+.nav-links a:hover {
+  color: #8B5E3C;
+}
+
+/* Кнопка "Профиль" */
+.nav-links .profile-btn {
+  color: #8B5E3C !important;
+  border: 1px solid #8B5E3C;
+  border-radius: 20px;
+  padding: 8px 15px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-links .profile-btn:hover {
+  color: white !important;
+  background-color: #8B5E3C;
+}
+
+/* Выпадающий список */
 .dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: 120%;
   left: 0;
   width: 100%;
   background-color: white;
@@ -222,18 +209,37 @@ export default {
   z-index: 1000;
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
-/* Убираем нижнее подчеркивание у текста в выпадающем списке */
 .dropdown-menu a {
-  text-decoration: none; /* Убираем подчеркивание */
-  color: #000; /* Основной цвет текста */
-  transition: color 0.3s ease; /* Плавный переход цвета */
+  text-decoration: none; 
+  color: #000;
+  transition: color 0.3s ease;
 }
 
-/* Подсветка текста зелёным при наведении */
 .dropdown-menu a:hover {
-  color: #12a370; /* Зелёный цвет при наведении */
+  color: #8B5E3C;
+}
+
+/* Показываем выпадающее меню, когда оно активно */
+.dropdown-menu.show {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Бургер-меню */
+.burger-menu {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #8B5E3C;
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /* Анимации */
@@ -267,27 +273,40 @@ export default {
   }
 
   .logo {
-    margin: 0 auto;
-    transform: scale(1.5);
     text-align: center;
     display: block;
-    padding-left: 0px !important;
+    top: 21%;
   }
 
   .nav-links {
     width: 100%;
+    display: none;
     justify-content: center;
     margin-top: 15px;
   }
 
   .dropdown {
     width: 90%;
+    border: 2px;
     margin-top: 10px;
     text-align: center;
   }
 
   .dropdown-button {
+    position: absolute;
+    left: 50%;
     width: 90%;
+    transform: translateX(-50%);
+    background-color: #8B5E3C;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .burger-menu {
+    display: block;
   }
 }
 
