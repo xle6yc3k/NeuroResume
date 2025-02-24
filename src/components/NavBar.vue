@@ -22,7 +22,13 @@
             <router-link class="nav-link" to="/">Главная</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/resume-builder">Конструктор резюме</router-link>
+            <router-link class="nav-link" to="/resume-builder">Создать резюме</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/analyse">Анализ вакансий</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/comb-check">Рассчёт совместимости</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/profile">Профиль</router-link>
@@ -34,6 +40,12 @@
 </template>
 
 <style>
+/* 🔹 Стили лого */
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
 /* 🔹 Стили для навигации */
 .navbar-nav .nav-link {
   color: #5A3E2B;
