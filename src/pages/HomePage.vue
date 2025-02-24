@@ -1,13 +1,21 @@
 <template>
-    <div class="page">
-      <h1>Главная</h1>
-      <p>Добро пожаловать в NeuroResume!</p>
-    </div>
-  </template>
-  
-  <style scoped>
-  .page {
-    padding: 20px;
-  }
-  </style>
-  
+  <div>
+    <HeroSection />
+    <FunctionalSection />
+  </div>
+</template>
+
+<script>
+import HeroSection from "../components/HeroSection.vue";
+import FunctionalSection from "../components/FunctionalSection.vue";
+
+export default {
+  components: {
+    HeroSection,
+    FunctionalSection,
+  },
+};
+</script>
+
+<style scoped>
+</style>
