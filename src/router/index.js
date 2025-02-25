@@ -1,4 +1,3 @@
-import '@fortawesome/fontawesome-free/css/all.min.css';
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../pages/HomePage.vue';
 import ResumeBuilder from '../pages/ResumeBuilderPage.vue';
@@ -15,7 +14,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
 
