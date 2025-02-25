@@ -3,10 +3,10 @@ name: Deploy NeuroResume Dev to GitHub Pages
 on:
   push:
     branches:
-      - dev  # Запускаем деплой при пуше в ветку dev
+      - dev
 
 permissions:
-  contents: read
+  contents: write  # Добавляем права на запись
 
 jobs:
   build-and-deploy:
@@ -33,3 +33,4 @@ jobs:
           branch: gh-pages
           folder: dist
           clean: true
+          token: ${{ secrets.GITHUB_TOKEN }}  # Используем встроенный токен
