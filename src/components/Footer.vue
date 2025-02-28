@@ -1,6 +1,6 @@
 <template>
     <footer class="footer py-5 fade-up">
-      <div class="container">
+      <div class="container fixed-bottom">
         <div class="row align-items-center justify-content-center">
           <!-- Левая часть: Логотип и текст -->
           <div class="col-lg-4 col-md-12 text-center text-lg-start">
@@ -62,8 +62,13 @@
 <style>
 /* 🔹 Основные стили футера */
 .footer {
-  background-color: #f5f0eb;
+  height: 500px;
+  background-color: #fff;
   color: #3b2f2f;
+}
+
+footer .row {
+  
 }
 
 /* 🔹 Логотип */
@@ -71,7 +76,7 @@
   font-size: 1.5rem;
   font-weight: bold;
   color: #8b5e3c;
-  text-decoration: none; /* Убрали подчёркивание */
+  text-decoration: none;
 }
 
 /* 🔹 Описание */
@@ -147,6 +152,9 @@
 }
 
 @media (max-width: 991px) {
+    .footer {
+      height: 600px;
+    }
     .footer-description {
         margin: 0 auto;
     }
@@ -154,6 +162,9 @@
 
 /* 🔹 Полная адаптация <768px */
 @media (max-width: 768px) {
+  .footer {
+    height: 700px;
+  }
   .footer .row {
     display: flex;
     flex-direction: column;

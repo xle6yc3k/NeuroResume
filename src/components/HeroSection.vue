@@ -50,7 +50,7 @@
     transform: translateY(-50%) rotate(30deg);
     width: 70vw;
     max-width: 900px;
-    z-index: 1;
+    z-index: 1000;
     filter: grayscale(80%) sepia(50%) saturate(60%) hue-rotate(10deg) brightness(110%);
   }
   
