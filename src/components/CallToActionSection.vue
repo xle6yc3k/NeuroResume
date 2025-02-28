@@ -1,6 +1,6 @@
 <template>
   <div class="cta-wrapper py-5">
-    <section class="cta-section text-center py-5 fade-in-left rounded-4">
+    <section class="cta-section text-center py-5 rounded-4 fade-down">
       <div class="container">
         <h2 class="cta-title">Готов к созданию идеального резюме?</h2>
         <router-link to="/resume-builder" class="btn cta-btn rounded-4">Начать бесплатно</router-link>

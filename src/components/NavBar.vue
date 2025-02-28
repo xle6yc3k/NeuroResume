@@ -130,6 +130,12 @@
   animation: fadeInRight 1s ease-out forwards;
 }
 
+.fade-down {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeDown 1s ease-out forwards;
+}
+
 /* 🔹 Логика анимаций */
 @keyframes fadeInLeft {
   from {
@@ -150,6 +156,17 @@
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 </style>

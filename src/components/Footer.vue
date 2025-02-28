@@ -67,10 +67,6 @@
   color: #3b2f2f;
 }
 
-footer .row {
-  
-}
-
 /* 🔹 Логотип */
 .footer-brand {
   font-size: 1.5rem;
