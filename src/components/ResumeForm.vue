@@ -1,30 +1,44 @@
 <template>
-    <div class="container mt-5">
-        <h2 class="title mb-5" >Создать резюме</h2>
-        <form @submit.prevent="generateResume">
-            <FormField
+    <div class="container p-5">
+        <h2 class="title mb-5" >Заполните данные</h2>
+        <form @submit.prevent="$emit('next-step')">
+            <div class="row">
+
+                <FormField class=" col-md-6"
                 id="name"
                 label="Имя и Фамилия"
                 v-model="resumeData.name"
                 placeholder="Имя Фамилия"
                 required
-            />
-            <FormField
-                id="email"
-                label="Email"
-                type="email"
-                v-model="resumeData.email"
-                placeholder="name@example.com"
-                required
-            />
-            <FormField
+                />
+                <FormField class=" col-md-6"
+                    id="email"
+                    label="Email"
+                    type="email"
+                    v-model="resumeData.email"
+                    placeholder="name@example.com"
+                    required
+                />
+            </div>
+            
+            <div class="row">
+                <FormField class=" col-md-6"
                 id="phone"
                 label="Телефон"
                 type="tel"
                 v-model="resumeData.phone"
                 placeholder="+7 (999) 999 99-99"
                 required
-            />
+                />
+                <FormField class=" col-md-6"
+                    id="phone"
+                    label="Город"
+                    v-model="resumeData.location"
+                    placeholder="Москва"
+                    required
+                />
+            </div>
+            
             <FormField
                 id="profession"
                 label="Профессия"
@@ -37,7 +51,7 @@
                 label="Образование"
                 type="textarea"
                 v-model="resumeData.education"
-                placeholder="Образование"
+                placeholder="Например: МГУ, Факультет информатики, 2015-2019"
                 required
             />
             <FormField
@@ -45,7 +59,7 @@
                 label="Опыт работы"
                 type="textarea"
                 v-model="resumeData.experience"
-                placeholder="Опыт работы"
+                placeholder="Опишите ваш опыт работы, должности и обязанности"
                 required
             />
             <FormField
@@ -53,43 +67,34 @@
                 label="Навыки"
                 type="textarea"
                 v-model="resumeData.skills"
-                placeholder="Навыки"
+                placeholder="Перечислите ваши профессиональные навыки"
                 required
             />
-            <button type="submit" class="btn">Создать резюме</button>
+            <div class="d-flex justify-content-between mt-4">
+                <button type="button" class="btn btn-outline-secondary" disabled>Назад</button>
+                <button type="submit" class="btn">Далее</button>
+            </div>
         </form>
     </div>
 </template>
   
 <script>
-
 import FormField from './FormField.vue';
 
 export default {
-    components:{
-        FormField
-    },
-    data() {
-        return {
-        resumeData: {
-            name: '',
-            email: '',
-            phone: '',
-            profession: '',
-            education: '',
-            experience: '',
-            skills: ''
-        }
-        };
-    },
-    methods: {
-        generateResume() {
-        // Здесь можно добавить логику для отправки данных на сервер
-        console.log('Резюме создано:', this.resumeData);
-        }
+  components: {
+    FormField
+  },
+  props: {
+    resumeData: {
+      type: Object,
+      required: true
     }
-    };
+  },
+  emits: ['next-step']
+};
 </script>
+
 
 <style scoped>
     .card {
@@ -97,6 +102,8 @@ export default {
     }
     .container{
         color: #3b2f2f;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .title{
@@ -112,4 +119,5 @@ export default {
     .btn:hover{
         background-color: #6d4c2f;
     }
+    
 </style>
