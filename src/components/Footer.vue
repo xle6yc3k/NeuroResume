@@ -1,180 +1,58 @@
 <template>
-    <footer class="footer py-5 fade-up">
-      <div class="container fixed-bottom">
-        <div class="row align-items-center justify-content-center">
-          <!-- Левая часть: Логотип и текст -->
-          <div class="col-lg-4 col-md-12 text-center text-lg-start">
-            <router-link class="footer-brand" to="/">
-                <span style="color: #8B5E3C;">Neuro</span><span style="color: #5A3E2B;">.Resume</span>
-            </router-link>
-            <p class="footer-description">
-              AI-помощник в создании профессионального резюме за несколько минут.
-            </p>
-            <div class="social-icons">
-              <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-              <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+    <footer class="w-full py-20 mt-10 relative text-[var(--text-secondary)] bg-[var(--background-main)]">
+      <div class="max-w-7xl mx-auto px-16">
+        <!-- Основной flex-контейнер -->
+        <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center">
+          
+          <!-- Блок Neuro.Resume -->
+          <div class="text-center text-xl font-bold mb-6 lg:mb-43 lg:text-left text-[var(--text-main)]">
+            &copy; 2025 Neuro.Resume • 
+          </div>
+          
+          <!-- Блок с колонками (Услуги и Ссылки) -->
+          <div class="flex justify-center space-x-16 lg:justify-end font-semibold">
+            
+            <!-- Колонка: Услуги -->
+            <div class="text-left">
+              <h6 class="text-xl text-[var(--text-main)]">Услуги</h6>
+              <ul class="mt-4 space-y-8 pt-4">
+                <li>
+                  <router-link class="hover:text-[var(--text-light)]" to="/resume">Создание резюме</router-link>
+                </li>
+                <li>
+                  <router-link class="hover:text-[var(--text-light)]" to="/analyse">Анализ вакансий</router-link>
+                </li>
+              </ul>
             </div>
+            
+            <!-- Колонка: Ссылки -->
+            <div class="text-left">
+              <h6 class="text-xl text-[var(--text-main)]">Ссылки</h6>
+              <ul class="mt-4 space-y-8 pt-4">
+                <li>
+                  <a href="https://t.me/s/jojiikk" class="hover:text-[var(--text-light)]">
+                    Telegram <i class="social-icon fab fa-telegram"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://vk.com/jojiikk" class="hover:text-[var(--text-light)]">
+                    VKontakte <i class="social-icon fab fa-vk"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://github.com/xle6yc3k/NeuroResume" class="hover:text-[var(--text-light)]">
+                    GitHub <i class="social-icon fab fa-github"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            
           </div>
-
-          <!-- Средняя колонка: Наши ссылки -->
-          <div class="col-lg-4 col-md-6 text-center">
-            <h6 class="footer-title">Наши ссылки</h6>
-            <ul class="footer-links fw-semibold">
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/">Главная</router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/resume-builder">Конструктор резюме</router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/profile">Профиль</router-link>
-                </li>
-            </ul>
-          </div>
-
-          <!-- Правая колонка: Наши сервисы -->
-          <div class="col-lg-4 col-md-6 text-center">
-            <h6 class="footer-title">Наши сервисы</h6>
-            <ul class="footer-links fw-semibold">
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/resume-builder">Создание резюме</router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/analyse">Анализ вакансий</router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/comb-check">Рассчёт совместимости</router-link>
-                </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Копирайт и Terms & Conditions -->
-        <div class="text-center mt-4">
-          <p class="copyright">© 2025 Neuro.Resume. Все права защищены.</p>
-          <p class="terms"><a href="#">Terms & Conditions</a></p>
         </div>
       </div>
     </footer>
-</template>
-
-<style>
-/* 🔹 Основные стили футера */
-.footer {
-  height: 500px;
-  background-color: #fff;
-  color: #3b2f2f;
-}
-
-footer .row {
+  </template>
   
-}
-
-/* 🔹 Логотип */
-.footer-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #8b5e3c;
-  text-decoration: none;
-}
-
-/* 🔹 Описание */
-.footer-description {
-  font-size: 0.9rem;
-  color: #6d4c2f;
-  max-width: 250px;
-}
-
-/* 🔹 Социальные иконки */
-.social-icons {
-  margin: 15px 0;
-}
-
-.social-icon {
-  color: #8b5e3c;
-  font-size: 1.2rem;
-  margin-right: 10px;
-  transition: color 0.3s ease;
-}
-
-.social-icon:hover {
-  color: #3b2f2f;
-}
-
-/* 🔹 Заголовки секций */
-.footer-title {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #3b2f2f;
-  margin-bottom: 15px;
-}
-
-/* 🔹 Ссылки */
-.footer-links {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-links li {
-  margin-bottom: 8px;
-}
-
-.footer-links a {
-  text-decoration: none;
-  color: #6d4c2f;
-  transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-  color: #8b5e3c;
-}
-
-/* 🔹 Юридическая информация */
-.terms {
-  margin-top: 5px;
-}
-
-.terms a {
-  font-size: 0.9rem;
-  color: #6d4c2f;
-  text-decoration: none;
-}
-
-.terms a:hover {
-  color: #8b5e3c;
-}
-
-/* 🔹 Копирайт */
-.copyright {
-  font-size: 0.9rem;
-  color: #6d4c2f;
-}
-
-@media (max-width: 991px) {
-    .footer {
-      height: 600px;
-    }
-    .footer-description {
-        margin: 0 auto;
-    }
-}
-
-/* 🔹 Полная адаптация <768px */
-@media (max-width: 768px) {
-  .footer {
-    height: 700px;
-  }
-  .footer .row {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .footer-links {
-    width: 100%;
-    text-align: center;
-  }
-}
-</style>
+  <style scoped>
+  </style>
+  
