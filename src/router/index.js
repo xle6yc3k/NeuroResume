@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../pages/Home.vue'
 import Analyse from '../pages/Analyse.vue'
 import Compability from '../pages/Compability.vue'
-import Profile from '../pages/Profile.vue'
+import Profile from '../pages/ProfilePage.vue'
 import Resume from '../pages/Resume.vue'
 
 const routes = [

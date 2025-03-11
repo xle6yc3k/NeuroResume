@@ -2,7 +2,7 @@
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useProfileStore } from '@/stores/profile'
-import axios from 'axios'
+import api from '@/api' // ✅ заменили axios
 
 const store = useProfileStore()
 const router = useRouter()
@@ -22,19 +22,18 @@ const deleteResume = async (id) => {
 
   try {
     // Обновляем profile.json
-    await axios.patch('/api/profile', {
+    await api.patch('/profile', {
       resumes: store.profile.resumes
     })
 
     // Обновляем resumes.json
-    await axios.patch('/api/resumes', {
+    await api.patch('/resumes', {
       resumes: store.allResumes
     })
   } catch (err) {
     console.error('Ошибка при сохранении:', err)
   }
 }
-
 
 onMounted(() => {
   if (!store.profile) {

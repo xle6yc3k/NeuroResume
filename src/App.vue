@@ -1,28 +1,20 @@
 <script setup>
+import Parallax from '@/components/Parallax.vue'
 import NavBar from "./components/NavBar.vue";
 import Footer from "./components/Footer.vue";
 import { RouterView } from "vue-router";
-import { ref } from "vue";
-import LiquidTransition from "./components/LiquidTransition.vue";
-
-const transitionEffect = ref(null);
-
-const beforeEnter = async (el) => {
-  await new Promise((resolve) => {
-    transitionEffect.value.animateTransition(resolve);
-  });
-};
 </script>
 
-<template class="">
-  <LiquidTransition ref="transitionEffect" />
+<template>
 
   <div class="relative min-h-screen text-[var(--text-light)] gradient-page">
     <div class="absolute inset-0 -z-10 animated-bg"></div>
+    
+    <Parallax class="absolute inset-0" />
     <NavBar />
 
     <RouterView v-slot="{ Component }">
-      <transition mode="out-in" @before-enter="beforeEnter">
+      <transition mode="out-in">
         <component :is="Component" />
       </transition>
     </RouterView>

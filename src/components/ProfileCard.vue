@@ -5,13 +5,24 @@ import { useProfileStore } from '@/stores/profile'
 const store = useProfileStore()
 const isEditing = ref(false)
 
+const editedProfile = ref({ name: '', email: '' })
+
 const labels = {
-  name: "Имя",
-  email: "Email"
+  name: 'Имя',
+  email: 'Email'
 }
 
-const toggleEdit = () => {
-  isEditing.value = !isEditing.value
+const startEdit = () => {
+  editedProfile.value = {
+    name: store.profile.name,
+    email: store.profile.email
+  }
+  isEditing.value = true
+}
+
+const saveProfile = async () => {
+  await store.updateProfile(editedProfile.value)
+  isEditing.value = false
 }
 
 onMounted(() => {
@@ -30,9 +41,9 @@ onMounted(() => {
       <button
         class="px-6 py-3 text-sm font-semibold rounded-full transition-all duration-300 transform hover:scale-105"
         :class="isEditing ? 'bg-green-500 text-white' : 'bg-[var(--background-cta)] text-[var(--text-main)] hover:bg-transparent hover:border hover:border-[var(--background-cta)]'"
-        @click="toggleEdit"
+        @click="isEditing ? saveProfile() : startEdit()"
       >
-        {{ isEditing ? "Сохранить" : "Редактировать" }}
+        {{ isEditing ? 'Сохранить' : 'Редактировать' }}
       </button>
     </div>
 
@@ -41,7 +52,7 @@ onMounted(() => {
         <label class="text-[var(--text-secondary)] text-sm font-medium mb-2 block">{{ labels[key] }}</label>
         <input
           v-if="isEditing"
-          v-model="store.profile[key]"
+          v-model="editedProfile[key]"
           class="w-full bg-[var(--background-section)] bg-opacity-50 border border-white/10 rounded-xl px-4 py-3 text-[var(--text-light)] focus:outline-none focus:border-[var(--text-secondary)] transition-all duration-300"
         />
         <p v-else class="text-[var(--text-light)] text-lg px-4 py-3 bg-[var(--background-section)] bg-opacity-20 rounded-xl group-hover:bg-opacity-30 transition-all duration-300">

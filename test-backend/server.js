@@ -1,4 +1,3 @@
-// server.js (Express)
 import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -7,17 +6,17 @@ import fs from 'fs-extra'
 
 const app = express()
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const dataPath = path.join(__dirname, 'data') // ✅ добавлено
+const dataPath = path.join(__dirname, 'data')
 
-// 🧠 CORS и API
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}))
 app.use(express.json())
 
-// 📁 Отдача собранного фронта
 const distPath = path.join(__dirname, '../dist')
 app.use(express.static(distPath))
 
-// API
 app.get('/api/profile', async (req, res) => {
   const profile = await fs.readJson(path.join(dataPath, 'profile.json'))
   res.json(profile)
@@ -30,19 +29,18 @@ app.get('/api/resumes', async (req, res) => {
 
 app.patch('/api/profile', async (req, res) => {
   const profilePath = path.join(dataPath, 'profile.json')
-  const profile = await fs.readJson(profilePath)
-  const { mainResumeId, resumes } = req.body
+  const currentProfile = await fs.readJson(profilePath)
 
-  if (mainResumeId !== undefined) {
-    profile.mainResumeId = mainResumeId
+  const updatedProfile = {
+    ...currentProfile,
+    ...req.body
   }
 
-  if (Array.isArray(resumes)) {
-    profile.resumes = resumes
-  }
+  console.log('PATCH /api/profile body:', req.body)
+  console.log('Обновляем профиль:', updatedProfile)
 
-  await fs.writeJson(profilePath, profile, { spaces: 2 })
-  res.json({ message: 'Profile updated', profile })
+  await fs.writeJson(profilePath, updatedProfile, { spaces: 2 })
+  res.json({ message: 'Profile updated', profile: updatedProfile })
 })
 
 app.patch('/api/resumes', async (req, res) => {
@@ -57,7 +55,6 @@ app.patch('/api/resumes', async (req, res) => {
   res.json({ message: 'Resumes updated', resumes })
 })
 
-// SPA fallback
 app.get('*', (req, res) => {
   res.sendFile(path.join(distPath, 'index.html'))
 })
