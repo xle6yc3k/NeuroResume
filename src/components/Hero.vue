@@ -137,7 +137,7 @@ onMounted(() => {
   bottom: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, var(--background-main) 99%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #0B0B24 98%);
   pointer-events: none;
 }
 </style>

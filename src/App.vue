@@ -14,10 +14,10 @@ const beforeEnter = async (el) => {
 };
 </script>
 
-<template>
+<template class="">
   <LiquidTransition ref="transitionEffect" />
 
-  <div class="relative min-h-screen text-[var(--text-light)] bg-[var(--background-main)]">
+  <div class="relative min-h-screen text-[var(--text-light)] gradient-page">
     <div class="absolute inset-0 -z-10 animated-bg"></div>
     <NavBar />
 

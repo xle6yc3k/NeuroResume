@@ -1,5 +1,5 @@
 <template>
-    <footer class="w-full py-20 mt-10 relative text-[var(--text-secondary)] bg-[var(--background-main)]">
+    <footer class="w-full py-20 mt-10 relative text-[var(--text-secondary)]">
       <div class="max-w-7xl mx-auto px-16">
         <!-- Основной flex-контейнер -->
         <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center">
