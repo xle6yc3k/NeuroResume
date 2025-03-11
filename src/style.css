@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -25,6 +27,7 @@
   --text-main: #E0E6F8; /* Светло-голубой, основной текст */
   --text-secondary: #C77DFF; /* Фиолетовый для акцентных текстов */
   --text-light: #FFFFFF; /* Чисто белый */
+  --icons-bfr-hover: rgba(255, 255, 255, 0.3); /* Иконки до наведения, слегка прозрачные */
 
   /* 🌆 Фоны */
   --background-main: #0A0F1D; /* Глубокий тёмный фон */
@@ -32,6 +35,7 @@
   --background-cta: #9D00FF; /* Кнопки и важные элементы */
   --background-footer: #0A0F1D; /* Тёмный футер */
   --background-highlight: #2B3A67; /* Выделенные элементы */
+  --background-indicator: rgba(255, 255, 255, 0.2); /* Индикатор навбара */
 
   /* 🌠 Градиенты (неоновые эффекты) */
   --gradient-primary: linear-gradient(135deg, #9D00FF, #00E5FF); /* Фиолетово-бирюзовый */
@@ -42,4 +46,16 @@
   --neon-purple: #9D00FF; /* Неоновый фиолетовый */
   --shadow: rgba(0, 0, 0, 0.3);
   --highlight: rgba(255, 255, 255, 0.15);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--background-main);
+}
+
+#app {
+  width: 100%;
+  margin: 0 auto;
 }
