@@ -1,5 +1,5 @@
 <template>
-  <section id="projects" class="max-w-6xl mt-16 mx-auto px-10 overflow-x-hidden">
+  <section id="projects" class="max-w-6xl mt-16 mx-auto px-10">
     <h2 class="text-5xl font-bold text-[var(--text-light)] font-acorn mb-12">Как это работает?</h2>
     <div class="grid gap-12 masonry-grid">
       <template v-for="(project, index) in projects" :key="index">

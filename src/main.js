@@ -4,12 +4,15 @@ import router from './router/index.js'
 import App from './App.vue'
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
 import 'aos/dist/aos.css'
 import AOS from 'aos'
 AOS.init()
 
-const app = createApp(App);
+import { createPinia } from 'pinia'
 
-app.use(router);
-app.mount('#app');
+const app = createApp(App)
+const pinia = createPinia()
+
+app.use(pinia)
+app.use(router)
+app.mount('#app')
