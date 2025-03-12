@@ -1,5 +1,5 @@
 <template>
-    <div class="space-y-10">
+    <div class="space-y-10 pt-40">
       <MatchSummary />
       <InsightCards />
       <EditActions />

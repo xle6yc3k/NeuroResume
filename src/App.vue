@@ -29,7 +29,7 @@ const route = useRoute()
       </transition>
     </RouterView>
 
-    <Footer v-if="phase !== 'visualizing, input'" />
+    <Footer v-if="!(route.path === '/analyse' && (phase === 'visualizing' || phase === 'input'))" />
   </div>
 </template>
 

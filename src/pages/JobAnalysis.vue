@@ -1,18 +1,19 @@
 <template>
-  <div
-    class="relative min-h-screen overflow-hidden"
-  >
+  <div class="relative min-h-screen overflow-hidden">
     <!-- 🎆 Фон -->
     <JobParallaxBackground />
 
     <!-- 💬 Центр: Ввод -->
-    <section class="h-screen flex flex-col justify-center items-center relative z-10">
-      <JobInputPanel v-if="props.phase === 'input'" @start-analysis="startAnalysis" />
+    <section
+      v-if="props.phase === 'input'"
+      class="min-h-screen flex flex-col justify-center items-center relative z-10"
+    >
+      <JobInputPanel @start-analysis="startAnalysis" />
 
       <!-- 👇 Подсказка прокрутки -->
       <div
         class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/60 text-sm text-center animate-bounce"
-        v-if="props.phase === 'input' && !showFooter"
+        v-if="!showFooter"
       >
         <i class="fas fa-arrow-down text-lg mb-1 block"></i>
         <span>Прокрути вниз</span>
@@ -26,12 +27,12 @@
     </div>
 
     <!-- 📜 Расширенный футер -->
-    <ExtendedFooter :visible="showFooter && props.phase === 'input'" />
+    <ExtendedFooter v-if="triggered && props.phase === 'input'" :visible="showFooter" />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 
 import JobParallaxBackground from '@/components/JobAnalysis/JobParallaxBackground.vue'
 import JobInputPanel from '@/components/JobAnalysis/JobInputPanel.vue'
@@ -45,12 +46,12 @@ const props = defineProps({
 })
 
 const showFooter = ref(false)
-let triggered = false
+const triggered = ref(false)
 
 const handleWheel = (event) => {
-  if (!triggered && event.deltaY > 0) {
+  if (!triggered.value && event.deltaY > 0 && props.phase === 'input') {
+    triggered.value = true
     showFooter.value = true
-    triggered = true
   }
 }
 
@@ -63,11 +64,19 @@ onUnmounted(() => {
   window.removeEventListener('wheel', handleWheel)
 })
 
+watch(() => props.phase, (newPhase) => {
+  if (newPhase === 'result' || newPhase === 'visualizing') {
+    showFooter.value = false
+    triggered = false
+    window.scrollTo({ top: 0 })
+  }
+})
+
 const startAnalysis = () => {
   props.setPhase('visualizing')
   setTimeout(() => {
     props.setPhase('result')
-  }, 9999)
+  }, 100)
 }
 </script>
 
