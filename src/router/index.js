@@ -1,21 +1,19 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../pages/Home.vue'
-import Analyse from '../pages/Analyse.vue'
-import Compability from '../pages/Compability.vue'
-import Profile from '../pages/ProfilePage.vue'
-import Resume from '../pages/Resume.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomePage from '../pages/Home.vue';
+import ResumeBuilder from '../pages/Resume.vue';
+import ProfilePage from '../pages/ProfilePage.vue';
+import JobAnalysis from '../pages/JobAnalysis.vue';
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/resume', component: Resume },
-  { path: '/analyse', component: Analyse },
-  { path: '/compability', component: Compability },
-  { path: '/profile', component: Profile }
-]
+  { path: '/', component: HomePage },
+  { path: '/resume', component: ResumeBuilder },
+  { path: '/profile', component: ProfilePage },
+  { path: '/analyse', component: JobAnalysis}
+];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
