@@ -1,44 +1,23 @@
-<script setup>
-import Parallax from '@/components/Parallax.vue'
-import NavBar from "./components/NavBar.vue";
-import Footer from "./components/Footer.vue";
-import { RouterView, useRoute } from "vue-router";
-import { ref, computed } from 'vue'
-
-const phase = ref('input')
-const setPhase = (value) => {
-  phase.value = value
-}
-
-const route = useRoute()
+<script setup lang="ts">
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div class="relative min-h-screen text-[var(--text-light)] gradient-page">
-    <div class="absolute inset-0 -z-10 animated-bg"></div>
-
-    <Parallax class="absolute inset-0" />
-    <NavBar v-if="phase !== 'visualizing'" />
-
-    <RouterView v-slot="{ Component, route }">
-      <transition mode="out-in">
-        <component
-          :is="Component"
-          v-bind="route.path === '/analyse' ? { phase, setPhase } : {}"
-        />
+  <div class="min-h-screen font-sans">
+    <nav class="bg-primary text-white p-4">
+      <div class="container mx-auto flex items-center justify-between">
+        <router-link to="/" class="text-xl font-bold">NeuroResume</router-link>
+        <div class="space-x-4">
+          <router-link to="/resume" class="hover:text-secondary transition-colors">Resume</router-link>
+          <router-link to="/profile" class="hover:text-secondary transition-colors">Profile</router-link>
+          <router-link to="/analyze" class="hover:text-secondary transition-colors">Analysis</router-link>
+        </div>
+      </div>
+    </nav>
+    <RouterView v-slot="{ Component }">
+      <transition name="page" mode="out-in">
+        <component :is="Component" />
       </transition>
     </RouterView>
-
-    <Footer v-if="!(route.path === '/analyse' && (phase === 'visualizing' || phase === 'input'))" />
   </div>
 </template>
-
-
-<style scoped>
-.v-enter-active, .v-leave-active {
-  transition: opacity 0.3s ease;
-}
-.v-enter-from, .v-leave-to {
-  opacity: 0;
-}
-</style>
